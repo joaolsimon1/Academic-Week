@@ -82,7 +82,7 @@ data1 %>% filter(country %in% countries) %>%
 
 filter(data1, year %in% c(1962, 2007)) %>%
   ggplot(aes(pop, lifeExp, col = continent)) +
-    geom_line() +
+    geom_point() +
       facet_grid(continent~year)
 
 ```
