@@ -1,0 +1,271 @@
+---
+title: <span style="font-size:140%"> Introdução ao RMarkdown e </span> <br> <span style="font-size:140%"> seus Principais Componentes </span>
+
+author: <span style="font-size:70%; color:grey"> João Lucas Simon </span> <br> <span style="font-size:70%; color:grey"> Leonardo Ribeiro Damiani Júnior </span> <br> <span style="font-size:70%; color:grey"> 27 de Setembro de 2022 </span>
+output: 
+    xaringan::moon_reader:
+      seal: true
+      css: [tamu, default-fonts]
+---
+
+```{r, echo=FALSE}
+
+# Pacotes
+library(knitr)
+
+```
+
+```{r setup, include=FALSE}
+opts_chunk$set(echo = FALSE)
+```
+
+class: center, middle
+
+# <h1 style="font-size:350%; color:DarkRed">**Pré - Requisitos**</h1>
+
+## R
+
+## RStudio
+
+
+---
+
+# <h1 style="color:DarkRed"> Rápida Introdução ao RStudio </h1>
+
+Interface para facilitar o uso da linguagem <c class="blue3"> R</c>.
+
+- Intuitivo;
+
+- Windows, Linux e IOS - MAC.
+
+Links para as instalações:
+
+- https://cran.r-project.org/ (R)
+
+- https://www.rstudio.com/products/rstudio/ (RStudio)
+
+</br>
+
+```{r, echo=FALSE, out.width='40%', fig.align = "center"}
+
+include_graphics('https://www.rstudio.com/wp-content/uploads/2018/10/RStudio-Logo-Flat.png')
+
+```
+
+---
+
+class: center, middle
+
+# <h1 style="font-size:350%; color:DarkRed">**RMarkdown**</h1>
+
+---
+
+# <h1 style="color:DarkRed"> Afinal, o que é RMarkdown? </h1>
+
+RMarkdown é um formato para escrevermos: 
+
+- <span style="color:DarkRed"> **Relatórios reprodutíveis e dinâmicos** </span> com R. 
+
+- Usado para incorporar <span style="color:DarkRed"> **código R  + Markdown + HTML + LaTeX + outros** </span>.
+
+- Utilizamos o pacote <span style="color:DarkRed"> **RMarkdown** </span> .
+
+- Extensão <span style="color:DarkRed">**.Rmd** </span>
+
+- Link: https://rmarkdown.rstudio.com/
+
+```{r, out.width='22%', fig.align = "right"}
+include_graphics('imagens/logo.png')
+```
+
+---
+
+
+
+# <h1 style="color:DarkRed"> Como funciona? </h1>
+
+</br>
+```{r, out.width='100%', fig.align = "center"}
+include_graphics('imagens/how_works.png')
+```
+</br>
+
+- <span style="color:DarkRed"> **KNITR (KNIT + R)** </span> 
+
+Permite “entrelaçar” textos do LaTeX, HTML e Markdown com códigos do R.
+
+- <span style="color:DarkRed"> **O Pandoc** </span>
+
+Um conversor extremamente versátil, capaz de converter diversos formatos.
+
+---
+
+
+## <h1 style="color:DarkRed"> Saídas </h1>
+
+```{r, out.width='55%', fig.align = "center"}
+include_graphics('https://d33wubrfki0l68.cloudfront.net/6d02e245de5328f2e9c25ca82eb7315717dcafa7/62e43/images/rmarkdownoutputformats.png')
+```
+
+---
+
+
+# <h1 style="color:DarkRed"> Instalação do Pacote RMarkdown </h1>
+
+- Instalamos o pacote necessário: **`install.packages("rmarkdown")`**
+
+
+```{r, out.width='70%', fig.align = "center", fig.cap= "Ilustração por Allison Horst - Twitter: @allison_horst"}
+include_graphics('https://www.bahmanrt.com/post/intro-furw/rmarkdown-art.png')
+```
+
+
+---
+
+
+## <h1 style="color:DarkRed"> Estrutura do RMarkdown </h1>
+
+```{r, out.width='100%', fig.align = "center", fig.cap= "Captura de tela da IDE RStudio"}
+include_graphics('imagens/estrutura.png')
+```
+
+---
+
+### <h2 style="color:DarkRed"> YAML (1) </h2>
+
+Seção de metadados, que apresenta <span style="color:DarkRed"> códigos YAML </span>.
+
+- Informações usadas para gerar o arquivo final. 
+
+- Exemplos: **título do relatório, autoria, data, formato gerado, etc **.
+
+- YAML é delimitado por três traços no começo e no final: ---
+
+Temos como principais argumentos para os outputs:
+
+- <span style="color:purple"> pdf_document </span>
+- <span style="color:purple"> html_document </span>
+- <span style="color:purple"> word_document </span>
+- <span style="color:purple"> beamer_presentation </span>
+- <span style="color:purple"> ioslides_presentation </span>
+
+
+---
+
+### <h2 style="color:DarkRed"> Chunks (2) </h2>
+
+Campos de código chamados de **chunks**. 
+
+- Podemos adicionar <span style="color:DarkRed"> códigos em R ou em algumas outras linguagens </span>. 
+
+- Delimitados por três crases, e a linguagem deve ser especificada entre chaves. 
+
+- Chunks com código em Python, é necessário ter o pacote {reticulate} instalado. 
+
+### <h2 style="color:DarkRed"> Markdown, HTML ou LaTeX (3) </h2>
+
+- Textos com <span style="color:DarkRed"> Markdown, HTML ou LaTeX </span> adicionados ao longo do relatório.
+
+- Fora das demarcações do YAMl e dos Chunks.
+
+---
+
+class: center, middle
+
+# <h1 style="font-size:350%; color:DarkRed">**Construindo nosso Relatório**</h1>
+
+---
+
+# <h1 style="color:Chocolate"> Exemplo PDF </h1>
+
+- Iremos criar um relatório em **.pdf** a partir do RMarkdown.
+
+- Primeiro, utilizaremos o seguinte pacote para utilização do LaTeX:
+
+`install.packages('tinytex')`
+
+`# Função para instalar o Tinytex`
+
+`tinytex::install_tinytex()`
+
+- Além disso, para criarmos um <span style = "color:purple"> pdf_document </span> informamos para o YAML:
+
+```
+---
+title: "Relatório PDF"
+author: Aluno UFRGS
+date: September 27, 2022
+output: pdf_document
+---
+```
+
+---
+
+# <h2 style="color:Chocolate">  Exemplo PDF - Fórmulas e Operações </h2>
+
+Assim, com o TinyTex instalado, podemos gerar fórmulas em LaTeX.
+
+```{r, out.width='60%', fig.align = "center"}
+include_graphics('imagens/latex.png')
+```
+
+
+</br>
+
+Através dos chunks, também podemos fazer operações através do R.
+
+```{r, echo=TRUE}
+
+resultado = 20 + 79
+print(resultado)
+
+x = sqrt(resultado * 2) # raiz do dobro
+print(x)
+```
+
+
+
+---
+
+# <h2 style="color:Chocolate"> Exemplo PDF - Código do R</h2>
+
+Utilizaremos o banco de dados **gapminder** do pacote **dslabs**.
+
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(dslabs)
+
+# Carregando o nosso banco de dados
+data(gapminder)
+
+# Nome das variáveis
+colnames(gapminder)
+```
+
+
+---
+
+# <h2 style="color:Chocolate"> Exemplo PDF - Gerando um Gráfico no R </h2>
+
+```{r pressure}
+plot(pressure)
+```
+
+---
+
+
+# <h1 style="color:YellowGreen"> Exemplo HTML <h1>
+
+---
+
+
+# <h1 style="color:DarkBlue"> Exemplo WORD <h1>
+
+---
+
+```{r, out.width='60%', fig.align = "center"}
+include_graphics('https://www.bahmanrt.com/post/intro-furw/r-good.png')
+```
+
+
