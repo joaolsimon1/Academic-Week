@@ -1,0 +1,89 @@
+---
+title: "Relatório Modelo -  Análise de Dados"
+author:
+- 'João Lucas Simon'
+- 'Cartão UFRGS: 00324507'
+-
+- 'Leonardo Ribeiro Damiani Júnior'
+- 'Cartão UFRGS: 00326165'
+output:
+  pdf_document: default
+lang: pt-br
+---
+
+\setlength{\parindent}{1cm}
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(gapminder)
+library(dplyr)
+library(ggplot2)
+```
+
+# Introdução
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+data1 <- gapminder
+
+amostra <- sample(c(1:1700), size = 6, replace = F)
+
+data2 <- data1[amostra,]
+
+colnames(data2) <- c("País", "Continente", "Ano", " Expectativa de Vida", "População", "GDP per-capita")
+kable(data2, align = "c", caption = "Amostra de seis observações aleatórias do banco de dados")
+
+```
+
+
+# Estatísticas Descritivas
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+aux1 <- aggregate(lifeExp ~ continent, data1, mean)
+
+colnames(aux1) <- c("Continente", "Anos")
+
+kable(aux1, digits = 2, align = "c", caption = "Expectativa de Vida em cada Continente ")
+
+```
+
+
+
+
+```{r}
+ggplot(data1, aes(x = continent, y = lifeExp)) +
+  geom_boxplot(outlier.colour = "hotpink") +
+  geom_jitter(position = position_jitter(width = 0.1, height = 0), alpha = 1/4)
+```
+
+
+```{r echo=FALSE, warning=FALSE}
+countries <- c("Brazil", "United States", "China")
+
+
+data1 %>% filter(country %in% countries) %>% 
+  ggplot(aes(year, lifeExp, col = country)) +
+    geom_line() +
+      labs(x = "Ano", y = "Expectativa de Vida", color = "Países")
+
+```
+
+
+```{r echo=FALSE, warning=FALSE}
+
+data1 %>% filter(country %in% countries) %>% 
+  ggplot(aes(year, pop, col = country)) +
+    geom_line() +
+      labs(x = "Ano", y = "População", color = "Países")
+
+```
+
+
+
+```{r}
+
+filter(data1, year %in% c(1962, 2007)) %>%
+  ggplot(aes(pop, lifeExp, col = continent)) +
+    geom_line() +
+      facet_grid(continent~year)
+
+```
+
