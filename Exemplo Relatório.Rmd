@@ -17,9 +17,12 @@ lang: pt-br
 library(gapminder)
 library(dplyr)
 library(ggplot2)
+library(knitr)
 ```
 
 # Introdução
+
+ O banco de dados que iremos utilizar será o "gapminder", que utiliza dados socioeconômicos fictícios de todos os países e continentes. Prosseguiremos com um análise descritivas de algumas variáveis com o intuito de exemplificar de forma prática o uso do RMarkdown.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 data1 <- gapminder
@@ -37,7 +40,7 @@ kable(data2, align = "c", caption = "Amostra de seis observações aleatórias d
 # Estatísticas Descritivas
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-aux1 <- aggregate(lifeExp ~ continent, data1, mean)
+aux1 <- aggregate(lifeExp ~ continent, data1, median)
 
 colnames(aux1) <- c("Continente", "Anos")
 
@@ -45,48 +48,19 @@ kable(aux1, digits = 2, align = "c", caption = "Expectativa de Vida em cada Cont
 
 ```
 
+ Na tabela acima, temos a mediana da expectativa de vida em cada continente. Sendo a mediana uma representação do valor central de um conjunto de dados, podemos observar que o continente africano possui a menor expectativa de vida com $47,79$ anos, enquanto que a Oceania possui a maior com $73,66$ anos.
 
+\newpage
 
-
-```{r}
+ Na imagem abaixo, temos o Box-Plot da expectativa de vida em cada continente com a sobreposição dos pontos representando cada observação, sendo os pontos rosas os outliers. O gráfico ilustra de forma clara a constatação que havíamos feito anteriormente, com o continente africano apresentando uma menor expectativa de vida, enquanto que a Oceania apresenta a maior dentre os continentes.  
+ 
+```{r echo=FALSE, warning=FALSE}
 ggplot(data1, aes(x = continent, y = lifeExp)) +
   geom_boxplot(outlier.colour = "hotpink") +
-  geom_jitter(position = position_jitter(width = 0.1, height = 0), alpha = 1/4)
+   geom_jitter(position = position_jitter(width = 0.1, height = 0), alpha = 1/4)+
+    labs(x = "Continente", y = "Expectativa de Vida", title = "Box-Plot da Expectativa de Vida em cada Coninente")
 ```
 
-
-```{r echo=FALSE, warning=FALSE}
-countries <- c("Brazil", "United States", "China")
-
-
-data1 %>% filter(country %in% countries) %>% 
-  ggplot(aes(year, lifeExp, col = country)) +
-    geom_line() +
-      labs(x = "Ano", y = "Expectativa de Vida", color = "Países")
-
-```
-
-
-```{r echo=FALSE, warning=FALSE}
-
-data1 %>% filter(country %in% countries) %>% 
-  ggplot(aes(year, pop, col = country)) +
-    geom_line() +
-      labs(x = "Ano", y = "População", color = "Países")
-
-```
-
-
-
-```{r}
-
-filter(data1, year %in% c(1962, 2007)) %>%
-  ggplot(aes(pop, lifeExp, col = continent)) +
-    geom_point() +
-      facet_grid(continent~year)
-
-```
-
-teste de edição
+ 
 
 
