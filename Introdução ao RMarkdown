@@ -75,7 +75,7 @@ RMarkdown é um formato para escrevermos:
 - Link: https://rmarkdown.rstudio.com/
 
 ```{r, out.width='22%', fig.align = "right"}
-#include_graphics('logo.png')
+include_graphics('https://www.kindpng.com/picc/m/440-4405234_rmarkdown-logo-png-transparent-png.png')
 ```
 
 ---
@@ -86,13 +86,15 @@ RMarkdown é um formato para escrevermos:
 
 </br>
 ```{r, out.width='100%', fig.align = "center"}
-include_graphics('how_works.png')
+include_graphics('https://d33wubrfki0l68.cloudfront.net/61d189fd9cdf955058415d3e1b28dd60e1bd7c9b/b739c/lesson-images/rmarkdownflow.png')
 ```
 </br>
 
 - <span style="color:DarkRed"> **KNITR (KNIT + R)** </span> 
 
 Permite “entrelaçar” textos do LaTeX, HTML e Markdown com códigos do R.
+
+</br>
 
 - <span style="color:DarkRed"> **O Pandoc** </span>
 
@@ -126,7 +128,7 @@ include_graphics('https://www.bahmanrt.com/post/intro-furw/rmarkdown-art.png')
 ## <h1 style="color:DarkRed"> Estrutura do RMarkdown </h1>
 
 ```{r, out.width='100%', fig.align = "center", fig.cap= "Captura de tela da IDE RStudio"}
-include_graphics('estrutura.png')
+include_graphics('https://github.com/joaolsimon1/Academic-Week/raw/main/imagens/estrutura.png')
 ```
 
 ---
@@ -166,7 +168,7 @@ Campos de código chamados de **chunks**.
 
 - Textos com <span style="color:DarkRed"> Markdown, HTML ou LaTeX </span> adicionados ao longo do relatório.
 
-- Fora das demarcações do YAMl e dos Chunks.
+- Fora das demarcações do YAML e dos Chunks.
 
 ---
 
@@ -182,13 +184,18 @@ class: center, middle
 
 - Primeiro, utilizaremos o seguinte pacote para utilização do LaTeX:
 
-`install.packages('tinytex')`
+```
+install.packages('tinytex')
+# Função para instalar o Tinytex
+tinytex::install_tinytex()
+```
 
-`# Função para instalar o Tinytex`
+</br>
 
-`tinytex::install_tinytex()`
 
 - Além disso, para criarmos um <span style = "color:purple"> pdf_document </span> informamos para o YAML:
+
+</br>
 
 ```
 ---
@@ -206,7 +213,7 @@ output: pdf_document
 Assim, com o TinyTex instalado, podemos gerar fórmulas em LaTeX.
 
 ```{r, out.width='60%', fig.align = "center"}
-include_graphics('latex.png')
+include_graphics('https://github.com/joaolsimon1/Academic-Week/raw/main/imagens/latex.png')
 ```
 
 
@@ -244,7 +251,7 @@ print(x)
  E após, podemos acessar o índice pelo ícone mostrado abaixo para percorrer o script de acordo com as divisões feitas:
  
 ```{r, out.width='40%', fig.align = "center"}
-include_graphics('indice.png')
+include_graphics('https://github.com/joaolsimon1/Academic-Week/raw/main/imagens/indice.png')
 ```
 
  Atalho para o índice: <span style="color:DarkRed"> Ctrl + Shift + O </span>
@@ -258,7 +265,7 @@ include_graphics('indice.png')
 Utilizaremos o banco de dados **gapminder** do pacote **dslabs**.
 
 
-```{r, echo=TRUE, message=FALSE, warning=FALSE}
+```{r echo=TRUE, size="small", message=FALSE, warning=FALSE}
 library(tidyverse)
 library(dslabs)
 
@@ -266,8 +273,10 @@ library(dslabs)
 data(gapminder)
 
 # Nome das variáveis
+options(width = 50)
 colnames(gapminder)
 ```
+
 
 
 ---
@@ -310,14 +319,16 @@ kable(aux1, digits = 2, align = "c", caption = "Expectativa de Vida em cada Cont
 
 # <h2 style="color:Chocolate"> Exemplo PDF - Gerando um Gráfico no R </h2>
 
+<center>
 `{r echo=FALSE, fig.height=4, fig.width=4}`
-```{r echo=FALSE, fig.height=5, fig.width=5, message=FALSE, warning=FALSE}
+</center>
+```{r echo=FALSE, fig.height=5, fig.width=5, message=FALSE, warning=FALSE, fig.align='center'}
 ggplot(gapminder, aes(x = continent, y = life_expectancy)) +
   geom_boxplot(outlier.colour = "hotpink") +
     labs(x = "Continente", y = "Expectativa de Vida", title = "Box-Plot da Expectativa de Vida em cada Continente")
 ```
 
-- O tamanho do gráfico pode ser alterado com os comandos **fig.height** **fig.width** mostrados acima.
+- O tamanho do gráfico pode ser alterado com os comandos **fig.height** e **fig.width** mostrados acima, além do comando **out.width**, onde passamos a porcentagem que queremos que o gráfico aumente ou diminua.
 ---
 
 # <h2 style="color:Chocolate"> Exemplo PDF - Configurações do Chunk </h2>
@@ -325,7 +336,7 @@ ggplot(gapminder, aes(x = continent, y = life_expectancy)) +
 - As alterações feitas nos slides anteriores além de poderem ser feitas escrevendo os comenados, podem ser feitas através do painel interativo **Opções de Modificação do Chunk**, que se encontram no lado superior direito de cada chunk:
 
 ```{r, out.width='70%', fig.align = "center", fig.cap= "Captura de tela da IDE RStudio"}
-include_graphics('chunk_options.png')
+include_graphics('https://github.com/joaolsimon1/Academic-Week/raw/main/imagens/chunk_options.png')
 ```
 
 ---
@@ -336,7 +347,7 @@ include_graphics('chunk_options.png')
 - Para compilarmos o documento no formato que especificamos na YAML, usamos a opção **Knit**:
 
 ```{r, out.width='60%', fig.align = "center", fig.cap= "Captura de tela da IDE RStudio"}
-include_graphics('knit.png')
+include_graphics('https://github.com/joaolsimon1/Academic-Week/raw/main/imagens/knit.png')
 ```
 
 - É importante ressaltar que para a compilação funcionar, todos os arquivos declarados no script (.png, .xlsx, etc.) devem estar na mesma pasta que o documento .Rmd está salvo;
@@ -374,11 +385,25 @@ output: word_document
 ---
 ```
 
+---
+
+# <h1 style="color:DarkRed"> Referências </h1>
+
+</br>
+
+**R Markdown: The Definitive Guide**
+
+- https://bookdown.org/yihui/rmarkdown/
+
+</br>
+
+**R Markdown Cookbook**
+
+- https://bookdown.org/yihui/rmarkdown-cookbook/
 
 ---
 
 ```{r, out.width='60%', fig.align = "center"}
 include_graphics('https://www.bahmanrt.com/post/intro-furw/r-good.png')
 ```
-
 
