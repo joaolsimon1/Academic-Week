@@ -75,7 +75,7 @@ RMarkdown é um formato para escrevermos:
 - Link: https://rmarkdown.rstudio.com/
 
 ```{r, out.width='22%', fig.align = "right"}
-include_graphics('imagens/logo.png')
+#include_graphics('logo.png')
 ```
 
 ---
@@ -86,7 +86,7 @@ include_graphics('imagens/logo.png')
 
 </br>
 ```{r, out.width='100%', fig.align = "center"}
-include_graphics('imagens/how_works.png')
+include_graphics('how_works.png')
 ```
 </br>
 
@@ -126,7 +126,7 @@ include_graphics('https://www.bahmanrt.com/post/intro-furw/rmarkdown-art.png')
 ## <h1 style="color:DarkRed"> Estrutura do RMarkdown </h1>
 
 ```{r, out.width='100%', fig.align = "center", fig.cap= "Captura de tela da IDE RStudio"}
-include_graphics('imagens/estrutura.png')
+include_graphics('estrutura.png')
 ```
 
 ---
@@ -206,7 +206,7 @@ output: pdf_document
 Assim, com o TinyTex instalado, podemos gerar fórmulas em LaTeX.
 
 ```{r, out.width='60%', fig.align = "center"}
-include_graphics('imagens/latex.png')
+include_graphics('latex.png')
 ```
 
 
@@ -227,6 +227,32 @@ print(x)
 
 ---
 
+# <h2 style="color:Chocolate"> Exemplo PDF - Item, Subitem e Índice </h2>
+
+ Antes de criarmos nossos chunks, podemos dividir o relatório de acordo com seu índice, digitando acima do chunk a <span style="color:DarkRed">**"#"** </span> de acordo com o grau do item :
+ 
+``` 
+# Item 1
+
+# Item 2`
+
+## Subitem 1
+
+# Item 3
+```
+
+ E após, podemos acessar o índice pelo ícone mostrado abaixo para percorrer o script de acordo com as divisões feitas:
+ 
+```{r, out.width='40%', fig.align = "center"}
+include_graphics('indice.png')
+```
+
+ Atalho para o índice: <span style="color:DarkRed"> Ctrl + Shift + O </span>
+
+
+---
+
+
 # <h2 style="color:Chocolate"> Exemplo PDF - Código do R</h2>
 
 Utilizaremos o banco de dados **gapminder** do pacote **dslabs**.
@@ -246,21 +272,108 @@ colnames(gapminder)
 
 ---
 
+# <h2 style="color:Chocolate"> Exemplo PDF - Resumo dos Dados </h2>
+
+`{r echo=TRUE}`
+```{r echo=TRUE, fig.width= 4.5, fig.height = 4.5, message=FALSE, warning=FALSE}
+str(gapminder)
+```
+
+---
+
+# <h2 style="color:Chocolate"> Exemplo PDF - Resumo dos Dados </h2>
+
+- Obtendo a informação da média da expectativa de vida em cada continente: 
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+aux1 <- aggregate(life_expectancy ~ continent, gapminder, mean)
+
+colnames(aux1) <- c("Continente", "Anos")
+
+kable(aux1, digits = 2, align = "c", caption = "Expectativa de Vida em cada Continente ")
+```
+---
+
+# <h2 style="color:Chocolate"> Exemplo PDF - Resumo dos Dados </h2>
+
+- Se não quisermos que os códigos apareçam no output, basta mudarmos a configuração do chunk **echo** para **FALSE**:
+
+`{r echo=FALSE}`
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+aux1 <- aggregate(life_expectancy ~ continent, gapminder, mean)
+
+colnames(aux1) <- c("Continente", "Anos")
+
+kable(aux1, digits = 2, align = "c", caption = "Expectativa de Vida em cada Continente ")
+```
+---
+
 # <h2 style="color:Chocolate"> Exemplo PDF - Gerando um Gráfico no R </h2>
 
-```{r pressure}
-plot(pressure)
+`{r echo=FALSE, fig.height=4, fig.width=4}`
+```{r echo=FALSE, fig.height=5, fig.width=5, message=FALSE, warning=FALSE}
+ggplot(gapminder, aes(x = continent, y = life_expectancy)) +
+  geom_boxplot(outlier.colour = "hotpink") +
+    labs(x = "Continente", y = "Expectativa de Vida", title = "Box-Plot da Expectativa de Vida em cada Continente")
 ```
+
+- O tamanho do gráfico pode ser alterado com os comandos **fig.height** **fig.width** mostrados acima.
+---
+
+# <h2 style="color:Chocolate"> Exemplo PDF - Configurações do Chunk </h2>
+
+- As alterações feitas nos slides anteriores além de poderem ser feitas escrevendo os comenados, podem ser feitas através do painel interativo **Opções de Modificação do Chunk**, que se encontram no lado superior direito de cada chunk:
+
+```{r, out.width='70%', fig.align = "center", fig.cap= "Captura de tela da IDE RStudio"}
+include_graphics('chunk_options.png')
+```
+
+---
+
+
+# <h2 style="color:Chocolate"> Exemplo PDF - Compilar </h2>
+
+- Para compilarmos o documento no formato que especificamos na YAML, usamos a opção **Knit**:
+
+```{r, out.width='60%', fig.align = "center", fig.cap= "Captura de tela da IDE RStudio"}
+include_graphics('knit.png')
+```
+
+- É importante ressaltar que para a compilação funcionar, todos os arquivos declarados no script (.png, .xlsx, etc.) devem estar na mesma pasta que o documento .Rmd está salvo;
+
+- O arquivo gerado (compilado) ficará salvo na mesma pasta em que se encontra o .Rmd.
 
 ---
 
 
 # <h1 style="color:YellowGreen"> Exemplo HTML <h1>
 
+- Para criarmos um <span style = "color:purple"> html_document </span>, basta alterarmos no output da YAML:
+
+```
+---
+title: "Relatório PDF"
+author: Aluno UFRGS
+date: September 27, 2022
+output: html_document
+---
+```
 ---
 
 
 # <h1 style="color:DarkBlue"> Exemplo WORD <h1>
+
+- Para criarmos um <span style = "color:purple"> word_document </span>, basta alterarmos no output da YAML:
+
+```
+---
+title: "Relatório PDF"
+author: Aluno UFRGS
+date: September 27, 2022
+output: word_document
+---
+```
+
 
 ---
 
