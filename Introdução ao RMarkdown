@@ -387,8 +387,10 @@ title: "Relatório WORD"
 author: Aluno UFRGS
 date: September 27, 2022
 output: word_document
+reference_docx: "template.docx"
 ---
 ```
+- Se for de interesse mudar o estilo do word (fonte, cor dos títulos, espaçamento entre as linhas, etc.), você pode salvar o documento .docx e usá-lo como modelo para futuros documentos do Word. Quando o Pandoc renderiza um novo documento do Word com um documento de referência (modelo), ele lê os estilos no modelo e os aplica ao novo documento.
 
 ---
 
