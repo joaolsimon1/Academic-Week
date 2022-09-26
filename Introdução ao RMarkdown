@@ -363,12 +363,17 @@ include_graphics('https://github.com/joaolsimon1/Academic-Week/raw/main/imagens/
 
 ```
 ---
-title: "Relatório PDF"
+title: "Relatório HTML"
 author: Aluno UFRGS
 date: September 27, 2022
 output: html_document
 ---
 ```
+
+- Além disso, utilizando o html não temos a opção do LaTeX, porém abrimos a porta ao html e algumas das funções funcionam apenas no modo html. Como é o caso da função do R abaixo:
+
+`include_graphics('grafico.png')`
+
 ---
 
 
@@ -378,7 +383,7 @@ output: html_document
 
 ```
 ---
-title: "Relatório PDF"
+title: "Relatório WORD"
 author: Aluno UFRGS
 date: September 27, 2022
 output: word_document
